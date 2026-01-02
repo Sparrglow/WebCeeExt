@@ -1,0 +1,167 @@
+{
+	"name": "webcee-ext",
+	"displayName": "WebCeeExt",
+	"description": "VS Code extension for WebCee .wce files (syntax, snippets, diagnostics, preview)",
+	"version": "0.1.0",
+	"publisher": "Sparrglow",
+	"license": "Apache-2.0",
+	"engines": {
+		"vscode": "^1.60.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"webcee",
+		"embedded",
+		"ui",
+		"c",
+		"preview",
+		"wce"
+	],
+	"main": "./dist/extension.js",
+	"files": [
+		"dist/**",
+		"syntaxes/**",
+		"snippets/**",
+		"language-configuration.json",
+		"README.md",
+		"README.zh-CN.md",
+		"LICENSE"
+	],
+	"activationEvents": [
+		"onStartupFinished",
+		"onLanguage:webcee",
+		"onCommand:webcee.openDocumentation",
+		"onCommand:webcee.showPreview",
+		"onCommand:webcee.openInBrowser",
+		"workspaceContains:**/*.wce"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "webcee",
+				"aliases": [
+					"WebCee",
+					"webcee"
+				],
+				"extensions": [
+					".wce"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "webcee",
+				"scopeName": "source.webcee",
+				"path": "./syntaxes/webcee.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "webcee",
+				"path": "./snippets/webcee.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "webcee.showPreview",
+				"title": "Show WebCee Preview",
+				"category": "WebCeeExt"
+			},
+			{
+				"command": "webcee.openInBrowser",
+				"title": "Open Preview in Browser",
+				"category": "WebCeeExt"
+			},
+			{
+				"command": "webcee.openDocumentation",
+				"title": "Open Documentation",
+				"category": "WebCeeExt"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "webcee.showPreview",
+					"when": "resourceLangId == webcee",
+					"group": "webcee@1"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "webcee.showPreview",
+					"when": "resourceExtname == .wce",
+					"group": "webcee@1"
+				}
+			]
+		},
+		"configuration": {
+			"title": "WebCeeExt",
+			"properties": {
+				"webcee.preview.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable preview panel."
+				},
+				"webcee.preview.autoRefresh": {
+					"type": "boolean",
+					"default": true,
+					"description": "Auto refresh preview on file save."
+				},
+				"webcee.preview.livePreview": {
+					"type": "boolean",
+					"default": false,
+					"description": "Refresh preview while typing (debounced)."
+				},
+				"webcee.preview.refreshDelay": {
+					"type": "number",
+					"default": 300,
+					"description": "Delay in ms before refreshing preview."
+				},
+				"webcee.diagnostics.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable syntax diagnostics."
+				}
+				,
+				"webcee.simulation.pollIntervalMs": {
+					"type": "number",
+					"default": 100,
+					"description": "Polling interval (ms) used by the WebCee runtime simulator in preview."
+				},
+				"webcee.simulation.initialData": {
+					"type": "object",
+					"default": {},
+					"description": "Initial key/value model data for the WebCee runtime simulator."
+				},
+				"webcee.simulation.handlerEffects": {
+					"type": "object",
+					"default": {},
+					"description": "Simulated handler effects. Example: { \"on_inc\": {\"type\":\"inc\",\"key\":\"count\",\"by\":1} }"
+				},
+				"webcee.simulation.modelUpdateEffects": {
+					"type": "object",
+					"default": {},
+					"description": "Simulated model update hook effects (like wce_handle_model_update). Example: { \"user_input\": [ {\"type\":\"setTemplate\",\"key\":\"server_response\",\"template\":\"Len=${len}, Rev='${reversed}'\" } ] }"
+				},
+				"webcee.simulation.lists": {
+					"type": "object",
+					"default": {},
+					"description": "Simulated list data returned by GET /api/list?name=... in preview."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^16.0.0",
+		"@types/vscode": "^1.60.0",
+		"typescript": "^4.5.0"
+	}
+}

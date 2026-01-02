@@ -1,0 +1,111 @@
+{
+  "Container": {
+    "prefix": "wce_container",
+    "body": [
+      "wce_container() {",
+      "  wce_css(\"${1:max-width: 900px; margin: 0 auto;}\");",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert a WebCee container block"
+  },
+  "Row": {
+    "prefix": "wce_row",
+    "body": [
+      "wce_row() {",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert a row block"
+  },
+  "Col": {
+    "prefix": "wce_col",
+    "body": [
+      "wce_col() {",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert a column block"
+  },
+  "Card": {
+    "prefix": "wce_card",
+    "body": [
+      "wce_card() {",
+      "  wce_css(\"${1:background: white; padding: 20px; border-radius: 10px;}\");",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert a card block"
+  },
+  "Panel": {
+    "prefix": "wce_panel",
+    "body": [
+      "wce_panel() {",
+      "  wce_css(\"${1:padding: 10px;}\");",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert a panel block"
+  },
+  "Text": {
+    "prefix": "wce_text",
+    "body": [
+      "wce_text(\"${1:Text}\") {",
+      "  ${2:// optional}",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert a text node"
+  },
+  "Text Bind": {
+    "prefix": "wce_text_bind",
+    "body": [
+      "wce_text(\"${1:placeholder}\") {",
+      "  wce_bind(\"${2:key}\");",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert a bound text node"
+  },
+  "Button": {
+    "prefix": "wce_btn",
+    "body": [
+      "wce_button(\"${1:Label}\") {",
+      "  wce_on_click(\"${2:on_click}\");",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert a button"
+  },
+  "Input": {
+    "prefix": "wce_input",
+    "body": [
+      "wce_input(\"${1:Placeholder}\") {",
+      "  wce_bind(\"${2:key}\");",
+      "  $0",
+      "}"
+    ],
+    "description": "Insert an input with bind"
+  },
+  "CSS": {
+    "prefix": "wce_css",
+    "body": [
+      "wce_css(\"${1:style}\");"
+    ],
+    "description": "Set css style"
+  },
+  "Bind": {
+    "prefix": "wce_bind",
+    "body": [
+      "wce_bind(\"${1:key}\");"
+    ],
+    "description": "Bind node to key"
+  },
+  "On Click": {
+    "prefix": "wce_on_click",
+    "body": [
+      "wce_on_click(\"${1:handler}\");"
+    ],
+    "description": "Set click handler"
+  }
+}
